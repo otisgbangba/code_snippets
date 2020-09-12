@@ -1,0 +1,474 @@
+[
+    {
+        "type": "m",
+        "data": "Machine Learning"
+    },
+    {
+        "type": "h",
+        "data": "R (Classification)"
+    },
+    {
+        "type": "c",
+        "data": "\ndata <- read.csv(\"example.csv\")\n"
+    },
+    {
+        "type": "c",
+        "data": "\nncol(data)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nnrow(data)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nhead(data, 5)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ntail(data, 5)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsummary(data)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ncor(data)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ntable(data$target)\n"
+    },
+    {
+        "type": "c",
+        "data": "\naggregate(data, list(data$target), mean)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata$target <- as.factor(data$target)\ncolors <- c(\"#5580E2\", \"#D2381D\")\nplot(data, col = colors[data$target])\n"
+    },
+    {
+        "type": "c",
+        "data": "\nhist(data$alpha, col = \"#5D82B9\", border = \"black\")\n"
+    },
+    {
+        "type": "c",
+        "data": "\nlibrary(ggplot2)\n\nggplot(data, aes(alpha, beta, colour = target)) + \n    geom_point()\n"
+    },
+    {
+        "type": "c",
+        "data": "\nlibrary(randomForest)\n\nmodel <- randomForest(\n    target ~ ., \n    data = data, \n    importance = TRUE,\n    proximity = TRUE,\n    ntree = 500\n)\n\nmodel$type\nmodel$confusion\nimportance(model, type = 2)\n"
+    },
+    {
+        "type": "h",
+        "data": "Python (Classification)"
+    },
+    {
+        "type": "c",
+        "data": "\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.set_style('whitegrid')\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset = pd.read_csv('example.csv')\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.shape\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.info()\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.head(4)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.tail(4)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.sample(4)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.describe()\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.corr()\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.groupby('target').median()\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.groupby('target').agg(['mean', 'std'])\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndataset.hist(bins=20, figsize=(10, 10))\nplt.show()\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsns.heatmap(dataset.corr(), square=True, annot=True)\nplt.show()\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsns.pairplot(dataset, hue='target', vars=dataset.columns[1:])\nplt.show()\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsns.relplot(x='alpha', y='beta', hue='target', data=dataset)\nplt.show()\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsns.jointplot(x='alpha', y='beta', kind='kde', data=dataset)\nplt.show()\n"
+    },
+    {
+        "type": "c",
+        "data": "\nimport numpy as np\nfrom sklearn.model_selection import cross_val_score\nfrom sklearn.ensemble import RandomForestClassifier\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata = np.loadtxt('example.csv', delimiter=',', skiprows=1)\nmodel = RandomForestClassifier(n_estimators=1000, max_depth=100)\nprint(cross_val_score(model, data[:, 1:], data[:, 0], cv=5, scoring='f1'))\n"
+    },
+    {
+        "type": "h",
+        "data": "Python (Image recognition)"
+    },
+    {
+        "type": "c",
+        "data": "\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom tensorflow.keras.preprocessing import image\nfrom tensorflow.keras.applications.resnet50 import ResNet50\nfrom tensorflow.keras.applications.resnet50 import preprocess_input\nfrom tensorflow.keras.applications.resnet50 import decode_predictions\n"
+    },
+    {
+        "type": "c",
+        "data": "\nmodel = ResNet50(weights='imagenet')\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndef predict(img_path):\n    img = image.load_img(img_path, target_size=(224, 224))\n    x = np.expand_dims(image.img_to_array(img), axis=0)\n    preds = model.predict(preprocess_input(x))\n    title = decode_predictions(preds, top=1)[0][0][1]\n    plt.title(title)\n    plt.imshow(img)\n    plt.show()\n"
+    },
+    {
+        "type": "h",
+        "data": "Python (Clustering, Dimensionality reduction)"
+    },
+    {
+        "type": "c",
+        "data": "\nimport matplotlib.pyplot as plt\nfrom sklearn import preprocessing\nfrom sklearn.cluster import KMeans\nfrom sklearn.decomposition import PCA\nfrom sklearn.datasets import load_iris\n"
+    },
+    {
+        "type": "c",
+        "data": "\niris = load_iris()\ntarget = iris.target\nX = preprocessing.scale(iris.data)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nkmeans = KMeans(n_clusters=3).fit(X)\nX_tr = PCA(n_components=2).fit_transform(X)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nplt.scatter(X_tr[:, 0], X_tr[:, 1], c=target)\nplt.show()\n"
+    },
+    {
+        "type": "c",
+        "data": "\nplt.scatter(X_tr[:, 0], X_tr[:, 1], c=kmeans.labels_)\nplt.show()\n"
+    },
+    {
+        "type": "h",
+        "data": "Python (Pandas)"
+    },
+    {
+        "type": "c",
+        "data": "\nimport re\nimport pandas as pd\nfrom sqlalchemy import create_engine\n"
+    },
+    {
+        "type": "c",
+        "data": "\nengine = create_engine('sqlite:///demo.db', echo=False)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nraw = [\n    'id:1 R:2 =red',\n    'id:2 R:3 =red',\n    'id:3 R:3 =red',\n    'id:4 R:4 =green',\n    'id:5 R:7 =red',\n    'id:6 R:6 =red',\n    'id:7 R:6 =red',\n    'id:8 R:5 =green',\n    'id:9 R:4 =green',\n    'id:10 R:3 =green',\n    'id:11 R:2 =red',\n    'id:12 R:1 =green',\n]\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndef parse(line):\n    match = re.search('id:(\\d+) R:(\\d+) =(\\w+)', line)\n    id = int(match.group(1))\n    score = int(match.group(2))\n    type = match.group(3)\n    return {'id': id, 'score': score, 'type': type}\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata = pd.DataFrame(map(parse, raw)).set_index('id')\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata['type'] = data['type'].map({'red': 1, 'green': 0})\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata['score'] = data['score'].apply(lambda x: x - 3)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nimport math\n\n\ndef sigmoid(x):\n    return 1 / (1 + math.exp(-x))\n\n\ndef classifier(x):\n    y = 0.041 + (0.061 * x)\n    return int(sigmoid(y) > 0.5)\n\n\ndata['target'] = data['score'].apply(classifier)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata.to_csv('_temp.csv', index=False)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata.to_excel('_temp.xlsx') \n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata.to_json('_temp.json', orient='records')\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata.to_html('_temp.html')\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndata.to_sql('example', con=engine)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsql = \"\"\"\n\nSELECT * FROM example;\n\n\"\"\"\n\n\npd.read_sql(sql, con=engine)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsql = \"\"\"\n\nSELECT \n    type,\n    MIN(score) AS score_min,\n    AVG(score) AS score_mean,\n    MAX(score) AS score_max\nFROM example\nGROUP BY type\nORDER BY type DESC;\n\n\"\"\"\n\n\npd.read_sql(sql, con=engine)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nsql = \"\"\"\n\nSELECT \n    type,\n    score,\n    SUM(score) OVER (PARTITION BY type) total_scores,\n    DENSE_RANK() OVER (ORDER BY score) dense_rank\nFROM example\nORDER BY dense_rank DESC;\n\n\"\"\"\n\n\npd.read_sql(sql, con=engine)\n"
+    },
+    {
+        "type": "h",
+        "data": "Python (Helpers)"
+    },
+    {
+        "type": "c",
+        "data": "\nimport re\nimport json\nimport requests\nfrom bs4 import BeautifulSoup\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndef load_json(filename):\n    with open(filename, 'r', encoding='utf-8') as jsonfile:\n        return json.load(jsonfile)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndef save_json(filename, data):\n    with open(filename, 'w', encoding='utf-8') as outfile:\n        json.dump(data, outfile, indent=4, sort_keys=True, ensure_ascii=False)\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndef fetch(url, headers):\n    response = requests.get(url=url, headers=headers)\n    return response.content\n"
+    },
+    {
+        "type": "c",
+        "data": "\ndef parse_html(html):\n    soup = BeautifulSoup(html, 'html.parser')\n    title = soup.title.string\n    text = soup.get_text()\n    links = []\n    for link in soup.find_all('a'):\n        links.append(link.get('href'))\n    return {'title': title, 'text': text, 'links': links}\n"
+    },
+    {
+        "type": "m",
+        "data": "Natural language processing (corpus)"
+    },
+    {
+        "type": "h",
+        "data": "Python (Django)"
+    },
+    {
+        "type": "c",
+        "data": "\n#!/bin/bash\n\n\ncat > requirements.txt <<EOL\ndjango==3.0.7\npsycopg2==2.8.5\ndjangorestframework==3.11.0\nmarkdown==3.2.2\ndjango-filter==2.3.0\nEOL\n\n\ncat > Dockerfile <<EOL\nFROM python:3\nENV PYTHONUNBUFFERED 1\nRUN mkdir /code\nWORKDIR /code\nCOPY requirements.txt /code/\nRUN pip install -r requirements.txt\nCOPY . /code/\nEOL\n\n\ncat > docker-compose.yml <<EOL\nversion: '3'\n\nservices:\n  db:\n    image: postgres\n    environment:\n      - POSTGRES_DB=postgres\n      - POSTGRES_USER=postgres\n      - POSTGRES_PASSWORD=postgres\n    ports:\n      - \"5432:5432\"\n  redis:\n    image: \"redis:alpine\"\n    ports:\n      - \"6379:6379\"\n  web:\n    build: .\n    command: python manage.py runserver 0.0.0.0:8000\n    volumes:\n      - .:/code\n    ports:\n      - \"8000:8000\"\n    depends_on:\n      - db\n      - redis\nEOL\n\n\ndocker-compose build\ndocker-compose run web django-admin startproject application .\ndocker-compose up -d\ndocker-compose run web python manage.py startapp corpus\ndocker-compose run web python manage.py makemigrations\ndocker-compose run web python manage.py migrate\ndocker-compose logs web\nchown -R $USER:$USER .\ndocker-compose run web python manage.py createsuperuser\n"
+    },
+    {
+        "type": "c",
+        "data": "\nfrom django.contrib import admin\nfrom django.urls import include, path\nfrom rest_framework import routers\nfrom corpus import views\n\n\nrouter = routers.DefaultRouter()\nrouter.register(r'documents', views.DocumentViewSet)\n\n\nurlpatterns = [\n    path('', include(router.urls)),\n    path('admin/', admin.site.urls)\n]\n"
+    },
+    {
+        "type": "c",
+        "data": "\nfrom django.contrib import admin\nfrom .models import Document\n\n\nadmin.site.register(Document)\n"
+    },
+    {
+        "type": "c",
+        "data": "\nfrom .models import Document\nfrom rest_framework import viewsets\nfrom .serializers import DocumentSerializer\n\n\nclass DocumentViewSet(viewsets.ModelViewSet):\n    queryset = Document.objects.all().order_by('-id')\n    serializer_class = DocumentSerializer\n"
+    },
+    {
+        "type": "c",
+        "data": "\nfrom .models import Document\nfrom rest_framework import serializers\n\n\nclass DocumentSerializer(serializers.ModelSerializer):\n    content_size = serializers.SerializerMethodField()\n    \n    def get_content_size(self, obj):\n        return len(obj.content)\n    \n    class Meta:\n        model = Document\n        fields = ['id', 'target', 'content', 'content_size']\n"
+    },
+    {
+        "type": "c",
+        "data": "\nfrom django.db import models\n\n\nclass Document(models.Model):\n    TARGETS = (\n        (0, 'Bad'),\n        (1, 'Good'),\n    )\n    target = models.IntegerField(default=TARGETS[0][0], choices=TARGETS)\n    content = models.TextField()\n    \n    def __str__(self):\n        return 'ID: {} (target: {})'.format(self.id, self.target)\n"
+    },
+    {
+        "type": "h",
+        "data": "PHP (Laravel 7)"
+    },
+    {
+        "type": "c",
+        "data": "\n<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\nRoute::get('/documents/{id}', 'DocumentController@show');\n"
+    },
+    {
+        "type": "c",
+        "data": "\n<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\nuse App\\Repositories\\DocumentRepository;\n\nclass DocumentController extends Controller\n{\n    /**\n     * The document repository implementation.\n     *\n     * @var DocumentRepository\n     */\n    protected $documents;\n\n    /**\n     * Create a new controller instance.\n     *\n     * @param DocumentRepository $documents\n     * @return void\n     */\n    public function __construct(DocumentRepository $documents)\n    {\n        $this->documents = $documents;\n    }\n\n    /**\n     * @param int $id\n     * @return string\n     */\n    public function show($id)\n    {\n        $document = $this->documents->find($id);\n        \n        return response()->json($document);\n    }\n}\n"
+    },
+    {
+        "type": "c",
+        "data": "\n<?php\n\nnamespace App\\Repositories;\n\nuse App\\Document;\n\nclass DocumentRepository \n{\n    /**\n     * @param int $id\n     * @return Document\n     */\n    public function find($id)\n    {\n        return Document::find($id);\n    }\n}\n"
+    },
+    {
+        "type": "c",
+        "data": "\n<?php\n\nnamespace App\\Console\\Commands;\n\nuse Faker;\nuse App\\Document;\nuse Illuminate\\Console\\Command;\n\nclass ImportDocuments extends Command\n{\n    /**\n     * The name and signature of the console command.\n     *\n     * @var string\n     */\n    protected $signature = 'import:documents';\n\n    /**\n     * The console command description.\n     *\n     * @var string\n     */\n    protected $description = 'Import documents';\n\n    /**\n     * Create a new command instance.\n     *\n     * @return void\n     */\n    public function __construct()\n    {\n        parent::__construct();\n    }\n\n    /**\n     * Execute the console command.\n     *\n     * @return mixed\n     */\n    public function handle()\n    {\n        $faker = Faker\\Factory::create();\n        \n        for($i = 0; $i < 1000; $i++) {\n            $document = new Document();\n            $document->content = $faker->text;\n            $document->target = rand(0, 1);\n            $document->save();\n        }\n    }\n}\n"
+    },
+    {
+        "type": "c",
+        "data": "\n<?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nclass CreateDocumentsTable extends Migration\n{\n    /**\n     * Run the migrations.\n     *\n     * @return void\n     */\n    public function up()\n    {\n        Schema::create('documents', function (Blueprint $table) {\n            $table->id();\n            $table->text('content');\n            $table->unsignedTinyInteger('target');\n            $table->timestamps();\n        });\n    }\n\n    /**\n     * Reverse the migrations.\n     *\n     * @return void\n     */\n    public function down()\n    {\n        Schema::dropIfExists('documents');\n    }\n}\n"
+    },
+    {
+        "type": "m",
+        "data": "Fetch internet resources"
+    },
+    {
+        "type": "h",
+        "data": "Bash"
+    },
+    {
+        "type": "c",
+        "data": "\ncurl -o 1.html -vvv -H \"User-Agent: Bot\" https://example.com\n"
+    },
+    {
+        "type": "c",
+        "data": "\nwget --debug -a main.log -O 2.html --user-agent=\"Bot\" https://example.com\n"
+    },
+    {
+        "type": "h",
+        "data": "PHP"
+    },
+    {
+        "type": "c",
+        "data": "\nclass Bot\n{\n    /**\n     * @param string $url\n     * @param string $userAgent\n     * @return string\n     */\n    public function fetch($url, $userAgent)\n    {\n        $handle = curl_init();\n        curl_setopt($handle, CURLOPT_URL, $url);\n        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);\n        curl_setopt($handle, CURLOPT_USERAGENT, $userAgent);\n        curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);\n        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);\n        curl_setopt($handle, CURLOPT_TIMEOUT, 5);\n        $result = curl_exec($handle);\n        curl_close($handle);\n        \n        return $result;\n    }\n}\n"
+    },
+    {
+        "type": "h",
+        "data": "PHP"
+    },
+    {
+        "type": "c",
+        "data": "\n// composer require guzzlehttp/guzzle:~6.0\nrequire 'vendor/autoload.php';\n\nclass Bot\n{\n    /**\n     * @param string $url\n     * @param string $userAgent\n     * @return string\n     */\n    public function fetch($url, $userAgent)\n    {\n        $client = new GuzzleHttp\\Client();\n        $headers = ['User-Agent' => $userAgent];\n        $res = $client->request('GET', $url, ['headers' => $headers]);\n        \n        return (string) $res->getBody();\n    }\n}\n"
+    },
+    {
+        "type": "h",
+        "data": "PHP"
+    },
+    {
+        "type": "c",
+        "data": "\nclass Bot\n{\n    /**\n     * @param string $url\n     * @return string\n     */\n    public function fetch($url)\n    {\n        return file_get_contents($url);\n    }\n}\n"
+    },
+    {
+        "type": "h",
+        "data": "Java"
+    },
+    {
+        "type": "c",
+        "data": "\nimport java.util.Scanner;\nimport java.net.URL;\nimport java.net.URLConnection;\n\npublic class Client {\n    public static String fetch(String url, String userAgent) {\n        String content = null;\n        URLConnection connection = null;\n        try {\n            connection =  new URL(url).openConnection();\n            connection.setRequestProperty(\"User-Agent\", userAgent);\n            Scanner scanner = new Scanner(connection.getInputStream());\n            scanner.useDelimiter(\"\\Z\");\n            content = scanner.next();\n            scanner.close();\n        } catch (Exception ex) {\n            ex.printStackTrace();\n        }\n        return content;\n    }\n}\n"
+    },
+    {
+        "type": "h",
+        "data": "Go"
+    },
+    {
+        "type": "c",
+        "data": "\npackage main\n\nimport (\n    \"log\"\n    \"time\"\n    \"io/ioutil\"\n    \"net/http\"\n)\n\nfunc fetch(url, userAgent string, timeout time.Duration) []byte {\n    req, err := http.NewRequest(\"GET\", url, nil)\n    if err != nil {\n        log.Fatalln(err)\n    }\n\n    req.Header.Set(\"User-Agent\", userAgent)\n    client := &http.Client{Timeout: time.Second * timeout}\n    resp, err := client.Do(req)\n    if err != nil {\n        log.Fatalln(err)\n    }\n\n    defer resp.Body.Close()\n    body, err := ioutil.ReadAll(resp.Body)\n    if err != nil {\n        log.Fatalln(err)\n    }\n\n    return body\n}\n"
+    },
+    {
+        "type": "m",
+        "data": "SQL"
+    },
+    {
+        "type": "h",
+        "data": "MariaDB (Full-Text search)"
+    },
+    {
+        "type": "c",
+        "data": "\nCREATE TABLE documents (\n    id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,\n    content TEXT NOT NULL\n) ENGINE=InnoDB;\n\n\nINSERT INTO documents (id, content) VALUES \n(1, 'Ad primos ictus non corruit ardua quercus'),\n(2, 'Adprime in vita esse utile, ut ne quid nimis'),\n(3, 'Benefacta male locata malefacta arbitror'),\n(4, 'Citius, altius, fortius!'),\n(5, 'Damnant, quod non intellegunt'),\n(6, 'Hic mortui vivunt, hic muti loquuntur'),\n(7, 'Nemo omnia potest scire');\n\n\nALTER TABLE documents ADD FULLTEXT (content);\n\n\nSELECT *\nFROM documents\nWHERE MATCH (content) AGAINST ('non' IN NATURAL LANGUAGE MODE)\nLIMIT 10;\n"
+    },
+    {
+        "type": "h",
+        "data": "MariaDB (Statistics)"
+    },
+    {
+        "type": "c",
+        "data": "\nCREATE TABLE scores (\n    id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,\n    document_id INT UNSIGNED NOT NULL,\n    score INT UNSIGNED NOT NULL\n) ENGINE=InnoDB;\n\n\nINSERT INTO scores (document_id, score) VALUES \n(1, 11),\n(2, 18),\n(2, 22),\n(4, 36),\n(5, 4),\n(2, 6),\n(4, 7),\n(4, 8),\n(5, 11),\n(6, 22),\n(7, 33),\n(3, 46);\n\n\nSELECT \n    document_id, \n    MIN(score),\n    AVG(score),\n    MAX(score),\n    STD(score)\nFROM scores\nGROUP BY document_id\nORDER BY document_id DESC;\n"
+    },
+    {
+        "type": "h",
+        "data": "PostgreSQL (Statistics)"
+    },
+    {
+        "type": "c",
+        "data": "\nCREATE TABLE stars (\n    id SERIAL PRIMARY KEY,\n    rank INTEGER NOT NULL,\n    score INTEGER NOT NULL,\n    created_at TIMESTAMP NOT NULL\n);\n\n\nINSERT INTO stars VALUES \n(1, 1, 2, '2020-01-01 00:00:00'),\n(2, 1, 2, '2020-01-01 00:01:00'),\n(3, 1, 3, '2020-01-01 00:02:00'),\n(4, 1, 4, '2020-01-01 00:03:00'),\n(5, 2, 10, '2020-01-01 01:00:00'),\n(6, 2, 20, '2020-01-01 01:01:00'),\n(7, 2, 30, '2020-01-01 01:02:00'),\n(8, 2, 20, '2020-01-01 01:03:00'),\n(9, 2, 10, '2020-01-01 01:04:00');\n\n\nSELECT \n    rank, \n    MIN(score),\n    AVG(score),\n    MAX(score)\nFROM stars\nGROUP BY rank\nORDER BY rank DESC;\n\n\nSELECT \n    rank, \n    score,\n    SUM(score) OVER (PARTITION BY rank) total_scores,\n    DENSE_RANK() OVER (ORDER BY score) dense_rank\nFROM stars;\n\n\nSELECT \n    date_trunc('hour', created_at) AS hour, \n    array_agg(rank) AS ranks\nFROM stars\nGROUP BY hour;\n"
+    },
+    {
+        "type": "h",
+        "data": "PostgreSQL (REGEXP)"
+    },
+    {
+        "type": "c",
+        "data": "\nCREATE TABLE messages (\n    id SERIAL PRIMARY KEY,\n    content TEXT NOT NULL\n);\n\n\nINSERT INTO messages VALUES \n(1, 'L:1 R:5'),\n(2, 'L:2 R:4'),\n(3, 'L:3 R:3'),\n(4, 'L:4 R:2'),\n(5, 'L:5 R:1'),\n(6, 'L:10 R:22'),\n(7, 'L:100 R:23'),\n(8, 'L:1000 R:24'),\n(9, 'L:10000 R:25');\n\n\nSELECT\n    REGEXP_MATCHES(content, 'L:(\\d+) R:\\d+') AS a,\n    REGEXP_MATCHES(content, 'L:\\d+ R:(\\d+)') AS b\nFROM messages;\n"
+    },
+    {
+        "type": "h",
+        "data": "PostgreSQL (Nested Sets)"
+    },
+    {
+        "type": "c",
+        "data": "\nCREATE TABLE tree (\n    id SERIAL PRIMARY KEY,\n    left_key INTEGER NOT NULL,\n    right_key INTEGER NOT NULL\n);\n\n\nINSERT INTO tree VALUES\n(1, 1, 10),\n(2, 2, 9),\n(3, 3, 8),\n(4, 4, 7),\n(5, 5, 6);\n\n\nSELECT * \nFROM tree \nWHERE left_key >= 3 AND right_key <= 8\nORDER BY left_key;\n"
+    },
+    {
+        "type": "h",
+        "data": "PostgreSQL (EXPLAIN)"
+    },
+    {
+        "type": "c",
+        "data": "\nCREATE TABLE documents (\n    id SERIAL PRIMARY KEY,\n    mode INTEGER NOT NULL,\n    content TEXT NOT NULL\n);\n\n\nINSERT INTO documents (mode, content)\nSELECT\n    round(random()),\n    repeat(md5(random()::text), 1024)\nFROM generate_series(1, 10000) data(i);\n\n\nUPDATE documents\nSET mode = 5\nWHERE id IN (1, 8, 845, 3636, 9899);\n\n\nEXPLAIN ANALYZE\nSELECT id, mode\nFROM documents\nWHERE mode = 5;\n\n\nCREATE INDEX idx_documents_mode ON documents(mode);\n\n\nEXPLAIN ANALYZE\nSELECT id, mode\nFROM documents\nWHERE mode = 5;\n"
+    },
+    {
+        "type": "h",
+        "data": "PostgreSQL (Many-to-Many relationship)"
+    },
+    {
+        "type": "c",
+        "data": "\nCREATE TABLE tag (\n    id SERIAL PRIMARY KEY,\n    title TEXT NOT NULL\n);\n\n\nCREATE TABLE doc (\n    id SERIAL PRIMARY KEY,\n    content TEXT NOT NULL\n);\n\n\nCREATE TABLE doc_tag (\n    doc_id INT,\n    tag_id INT,\n    CONSTRAINT doc_tag_pkey PRIMARY KEY (doc_id, tag_id)\n);\n\n\nINSERT INTO tag VALUES\n(1, 'A'),\n(2, 'B');\n\n\nINSERT INTO doc VALUES\n(1, 'Q'),\n(2, 'W'),\n(3, 'E');\n\n\nINSERT INTO doc_tag VALUES\n(1, 1),\n(1, 2),\n(3, 1);\n\n\nSELECT\n    d.id,\n    d.content,\n    array_agg(t.title)\nFROM doc_tag dt\nJOIN tag t ON t.id = dt.tag_id\nJOIN doc d ON d.id = dt.doc_id\nGROUP BY d.id;\n"
+    },
+    {
+        "type": "m",
+        "data": "Linux commands"
+    },
+    {
+        "type": "h",
+        "data": "Bash"
+    },
+    {
+        "type": "c",
+        "data": "\ngrep -rnw './' -e 'title'\n"
+    },
+    {
+        "type": "c",
+        "data": "\ntar -zcvf archive.tar.gz ./dir\ntar -xzvf archive.tar.gz\n"
+    },
+    {
+        "type": "c",
+        "data": "\ngpg --generate-key\ngpg --recipient demo --armor --encrypt 1.html\ngpg --decrypt 1.html.asc\n"
+    },
+    {
+        "type": "c",
+        "data": "\ngpg --symmetric 2.html\ngpg -o 2.html -d 2.html.gpg\n"
+    },
+    {
+        "type": "c",
+        "data": "\ngit fetch --all\ngit checkout -b ID-1\ngit reset --hard origin/dev\ngit diff\ngit status\ngit add --all\ngit commit -a -m \"ID-1\"\ngit rebase -i origin/dev\ngit push origin ID-1\n"
+    },
+    {
+        "type": "c",
+        "data": "\ngit hash-object info.txt\nmd5sum info.txt\nsha1sum info.txt\n"
+    }
+]
